@@ -47,7 +47,7 @@ function handleResponse(responseText) {
 		var message = messages[i];
 		
 		var div = document.createElement("div");
-		div.innerHTML = "<p>"+message.profile;
+		div.innerHTML = "<p><b>Submitter: </b>"+message._owner+"<p>"+message.profile;
 		out.appendChild(div);
 	}
 	document.getElementById("chat").style.visibility = "visible"
