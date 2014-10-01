@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Crosscloud Profiles App</title>
+<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
+
+<script src="./script.js"></script>
+
+<style>
+</style>
+
+</head>
+<body>
+    <form action="#" onsubmit="reload();return false;" >
+	<p style="float:right">Pod URL:<input id="podurl" type="text" size="20" value="http://try.fakepods.com" /><input type="submit" value="OK" /><br/>
+	</form>
+	<h1>Crosscloud Profiles App</h1>
+	<hr/>
+	<div id="chat" style="visibility: hidden;">
+	<form action="#" onsubmit="newmsg();return false;" >
+	<p>Name:<input id="name" type="text" placeholder="Bob Dylan" size="20"/></p>
+	<p>Birthday:<input id="birthday" type="text" placeholder="9/12/1993" size="20"/></p>
+	<p>Height:<input id="height" type="text" size="10"/></p>
+	<input type="submit" value="OK" />
+	</form>
+
+
+	<h2>Profiles:</h2>
+	<div id="profiles"></div>
+
+	
+	</div>
+
+</body>
+</html>
