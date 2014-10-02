@@ -35,11 +35,20 @@ function handleResponse(responseText) {
 	var messages = [];
 	for (var i=0; i<all.length; i++) {
 		var item = all[i];
-		if ('profile' in item) {
+		if ('profiles' in item) {
 			messages.push(item)
 		}
 	}
-	
+	messages.sort(compareName);
+
+	function compareName(a, b) {
+    if (a.profiles.name === b.profiles.name) {
+        return 0;
+    }
+    else {
+        return (a.profiles.name < b.profiles.name) ? -1 : 1;
+    }
+}
 	
 	var out = document.getElementById("profiles")
 	while(out.firstChild) { out.removeChild(out.firstChild) }
@@ -47,7 +56,8 @@ function handleResponse(responseText) {
 		var message = messages[i];
 		
 		var div = document.createElement("div");
-		div.innerHTML = "<p><b>Submitter: </b>"+message._owner+"<p>"+message.profile;
+		div.innerHTML = "<p><b>Submitter: </b>"+message._owner+"<p><b>Name: </b>"+message.profiles.name
+							+"<p><b>Birthday: </b>"+message.profiles.birthday+"<p><b>Height: </b>"+message.profiles.height;
 		out.appendChild(div);
 	}
 	document.getElementById("chat").style.visibility = "visible"
@@ -61,6 +71,7 @@ function newmsg() {
 	var name = document.getElementById("name").value;
 	var birthday = document.getElementById("birthday").value;
     var height = document.getElementById("height").value;
+    
     var message = "<p>"+"<b>Name: </b>"+name+"<p>"+"<b>Birthday: </b>"+birthday+"<p>"+"<b>Height: </b>"+height;
 	document.getElementById("name").value = "";
 	document.getElementById("birthday").value="";
@@ -75,7 +86,8 @@ function newmsg() {
      		}
 		}
 		request.setRequestHeader("Content-type", "application/json");
-		var content = JSON.stringify({profile:message, time:Date.now()});
+		var content = JSON.stringify({profiles: {name: name, birthday: birthday, height:height},
+			time:Date.now()});
 		request.send(content);
 	} 
 }
