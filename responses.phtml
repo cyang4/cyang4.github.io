@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+
+	<h1>Mystery Emailer</h1>
+
+</head>
+<body>
+
+<br>
+<p>
+
+<?php
+$to='cyang4@wellesley.edu';
+//echo 'post: '.$_POST['submit'];
+if (@$_POST['submit']=='Submit'){
+
+	$from = $_POST['from'];
+	@$fromName = $_POST['fromname'];
+	$subject = $_POST['subject'];
+	$message = $_POST['message'];
+}
+else {
+	$from = '';
+	$subject = '';
+	$message = '';
+	$fromName = '';
+}
+
+?>
+
+<form action= "#" method="post">
+From Email: <input type="text" name="from"><br>
+From Name: <input type="text" name="fromname"><br><br>
+Subject: <input type="text" name="subject"><br>
+Message: <input type="text" name="message" size = 50><br>
+<input type="submit" name = "submit" value="Submit">
+</form> 
+
+
+
+<?
+
+$headers = 'From: '.$fromName.'<'.$from . '>'."\r\n" .
+    'Reply-To: '.$fromName.'<'.$from . '>'."\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+
+@mail($to, $subject, $message, $headers);
+?>
+
+
+</body>
+</html>

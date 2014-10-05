@@ -1,9 +1,289 @@
 <!DOCTYPE html>
 <html>
-<body>
+
 <h1>Cecille Yang</h1>
-<p>Temporary page (please excuse the ugliness)</p>
-<p>For the JSON fetching assignment, click <a href='test2.html'>here</a>.</p>
-<p>For the crosscloud testing app, click <a href='crosscloudApp.html'>here</a></p>
+<p>Revamped, shiny new website to come... Soon.</p>
+
+<p><u>Possible Relevant Links</u>
+<br>Click <a href = 'crosscloud/dir.html'>here</a> if you are looking for MIT project links.
+<br><a href = 'responses.phtml'>Leave Me a Message</a>
+
+
+<p/>Meanwhile, have a clown. His name is Bob.
+
+
+<!-- 
+Cecille Yang
+9/25/14 
+CS 307
+The code below creates a clown, with the capability of easily creating multiple
+clowns of multiple sizes. I've set most of the functions in porportion to the
+height of the clown in the final function to make constructing a clown easier (fewer
+parameters to pass in). However, this can easily be changed by creating a new drawClown
+function that takes in all parameters - waist, leg length, foot length, etc.
+ -->
+
+    <style>      
+      canvas {
+          display: block;
+          margin: 10px auto;
+          width: 50%;
+          height: 500px;
+      }
+    </style>
+    <script src="http://cs.wellesley.edu/~cs307/threejs/libs/three.min.js"></script>
+    <script src="http://cs.wellesley.edu/~cs307/threejs/libs/OrbitControls.js"></script>
+    <script src="http://cs.wellesley.edu/~cs307/threejs/libs/tw.js"></script>
+  </head>
+<body>
+
+<script id="prog">
+var scene = new THREE.Scene();
+//sceneParams in case we want to implement GUI in the future
+var sceneParams = {
+    
+}
+
+
+//===============================================================
+//Draw a foot, basically a half sphere.
+//===============================================================
+function drawFoot(footRad){
+  var foot = new THREE.SphereGeometry(footRad, 8, 6, 0, Math.PI);
+  var material = new THREE.MeshBasicMaterial({color: THREE.ColorKeywords.cyan});
+  var sphere = new THREE.Mesh(foot, material);
+  //original half sphere is vertical. Rotate it like below:
+  sphere.rotation.x=-Math.PI/2
+  return sphere;
+}
+
+//===============================================================
+//Draw a leg (foot and cylinder)
+//===============================================================
+function drawLeg(legHeight, footRad){
+  var leg = new THREE.Object3D();
+  var geom = new THREE.CylinderGeometry(footRad/4, footRad/4, legHeight);
+  var material = new THREE.MeshBasicMaterial({color: THREE.ColorKeywords.magenta});
+  var cyl = new THREE.Mesh(geom, material);
+  cyl.position.set(0,legHeight/2,0);
+  var foot = drawFoot(footRad);
+  leg.add(foot);
+  leg.add(cyl);
+  return leg;
+}
+//===============================================================
+//Creates an arm. The origin is in the center of the shoulder.
+//At this point, the arm is not rotated at all
+//===============================================================
+function drawArm(shoulderRad){
+  var arm = new THREE.Object3D();
+
+  var armlength = shoulderRad*5;
+
+  var shoulder = new THREE.SphereGeometry(shoulderRad);
+  var material = new THREE.MeshBasicMaterial({color: THREE.ColorKeywords.magenta});
+  var shoul = new THREE.Mesh(shoulder, material);
+
+  var link = new THREE.CylinderGeometry(shoulderRad/3, shoulderRad/3, armlength);
+  var mat2 = new THREE.MeshBasicMaterial({color: THREE.ColorKeywords.dodgerblue});
+  var lin = new THREE.Mesh(link, mat2);
+  lin.position.set(0, -shoulderRad-armlength/2.3, 0); //don't want arm to be just touching, so 2.3 to complensate
+
+  var hand = new THREE.SphereGeometry(shoulderRad);
+  var mat3 = new THREE.MeshBasicMaterial({color: THREE.ColorKeywords.cyan});
+  var han = new THREE.Mesh(hand, mat3);
+  han.position.set(0, -shoulderRad-armlength, 0);
+
+  arm.add(shoul);
+  arm.add(lin);
+  arm.add(han);
+
+  return arm;
+}
+
+
+//===============================================================
+//Draw two legs, set at the right distance apart. Center is the 
+//middle point between the feet, which are just touching.
+//===============================================================
+function drawLegs(legHeight, footRad){
+  var legs = new THREE.Object3D();
+  var leg1 = drawLeg(legHeight, footRad);
+  var leg2 = drawLeg(legHeight, footRad);
+  leg1.position.set(-footRad,0,0)
+  leg2.position.set(footRad, 0, 0); 
+  legs.add(leg1);
+  legs.add(leg2);
+  return legs;
+}
+
+
+//===============================================================
+//Draw the body (main top and legs). All parameters are in proportion
+//to the waist
+//===============================================================
+function drawBody(waist){
+  var body = new THREE.Object3D();
+  var torso = drawTorso(waist);
+  torso.position.set(0, waist*3, 0);
+  var legs = drawLegs(waist*2, waist/2);
+  body.add(torso);
+  body.add(legs);
+  return body;
+}
+//===============================================================
+//Draw the torso (body, legs, arms)
+//===============================================================
+
+function drawTorso(waist){
+  var torso = new THREE.Object3D();
+
+  var body = new THREE.SphereGeometry(waist, 12, 12);
+  var material = new THREE.MeshBasicMaterial({color: THREE.ColorKeywords.dodgerblue});
+  var bod = new THREE.Mesh(body, material);
+  bod.scale.y=1.3;
+
+  torso.add(bod);
+
+  var arm1 = drawArm(waist/4);
+  arm1.rotation.z = -Math.PI/5;
+  arm1.position.set(-waist*.8, waist*.8, 0);
+  torso.add(arm1);
+  var arm2 = drawArm(waist/4);
+  arm2.rotation.z = Math.PI/5;
+  arm2.position.set(waist*.8, waist*.8, 0);
+  torso.add(arm2);
+  return torso;
+}
+
+
+//===============================================================
+//Draw the hat (without tilt)
+//===============================================================
+function drawHat(midRad){
+  var hat = new THREE.Object3D();
+  var height = midRad*2;
+  var geom = new THREE.CylinderGeometry(midRad*1.3, midRad, height, 16, 16); //top of hat
+  var material = new THREE.MeshBasicMaterial({color: THREE.ColorKeywords.dodgerblue});
+  var top = new THREE.Mesh(geom, material);
+  top.position.set(0, height/2, 0);
+  hat.add(top);
+
+  var geom2 = new THREE.SphereGeometry(midRad*2, 16, 16); //hat brim
+  var material2 = new THREE.MeshBasicMaterial({color: THREE.ColorKeywords.dodgerblue});
+  var brim = new THREE.Mesh(geom2, material2);
+  brim.scale.y=0;
+  hat.add(brim);
+
+  return hat;
+}
+
+
+//===============================================================
+//Draw the face
+//===============================================================
+function drawFace(faceWidth){
+  var face = new THREE.Object3D();
+
+  //head-- pretty straight forward sphere
+  var geom = new THREE.SphereGeometry(faceWidth, 15, 15);
+  var material = new THREE.MeshBasicMaterial({color: THREE.ColorKeywords.aquamarine});
+  var head = new THREE.Mesh(geom, material);
+  face.add(head);
+
+  //ears-- can use the same geometry and just make two meshes
+  var geomEar = new THREE.SphereGeometry(faceWidth/4);
+  var materialEar = new THREE.MeshBasicMaterial({color: THREE.ColorKeywords.indigo});
+  var ear1 = new THREE.Mesh(geomEar, materialEar);
+  var ear2 = new THREE.Mesh(geomEar, materialEar);
+  ear1.position.set(-faceWidth, 0, 0);
+  ear2.position.set(faceWidth, 0, 0);
+  face.add(ear1);
+  face.add(ear2);
+
+  //eyes-- they're very similar, so we can use the same geometry and just create two meshes
+  var geom1 = new THREE.SphereGeometry(faceWidth/9);
+  var material1 = new THREE.MeshBasicMaterial({color: THREE.ColorKeywords.indigo});
+  var eye1 = new THREE.Mesh(geom1, material1);
+  eye1.position.set(-faceWidth*.4, 0, faceWidth*0.9);
+  face.add(eye1);
+  var eye2 = new THREE.Mesh(geom1, material1);
+  eye2.position.set(faceWidth*.4, 0, faceWidth*0.9);
+  face.add(eye2);
+
+  //draw a nose
+  var geom2 = new THREE.SphereGeometry(faceWidth/11);
+  var nose = new THREE.Mesh(geom2, material1);
+  nose.position.set(0, -faceWidth*.3, faceWidth*0.9);
+  face.add(nose);
+
+  //Smile-- use TorusGeometry
+  var geom3 = new THREE.TorusGeometry(faceWidth/4, faceWidth/17, 12, 12, -Math.PI/2);
+  var material2 = new THREE.MeshBasicMaterial({color: THREE.ColorKeywords.pink});
+  var smile = new THREE.Mesh(geom3, material2);
+  smile.position.set(0, -faceWidth*.4, faceWidth*0.9);
+  smile.rotation.z=-Math.PI/6;
+  face.add(smile);
+
+
+  return face;
+}
+
+//===============================================================
+//Draw the person- head, torso, legs
+//===============================================================
+function drawPerson(height){
+  var person = new THREE.Object3D();
+  var face = drawFace(height/5);
+  var bdy = drawBody(height/4.5);
+  face.position.set(0, height*1.1, 0);
+
+  //origin, at (0, 0, 0)
+  var geom = new THREE.SphereGeometry(0.01);
+  var material = new THREE.MeshBasicMaterial({color: THREE.ColorKeywords.magenta});
+  var originDot = new THREE.Mesh(geom, material);
+
+  person.add(face);
+  person.add(bdy);
+  person.add(originDot);
+  return person;
+}
+
+//===============================================================
+//Draw the entire clown!
+//===============================================================
+function drawClown(height){
+  var clown = new THREE.Object3D();
+  var body = drawPerson(height);
+  var hat = drawHat(height*0.17);
+  //tilt the hat a bit
+  hat.rotation.x=-Math.PI/8;
+  hat.rotation.z=-Math.PI/20;
+
+  //put the hat on the clown's head
+  hat.position.set(0, height*1.24, -height*0.06);
+
+  clown.add(body);
+  clown.add(hat);
+  return clown;
+}
+
+//===============================================================
+//Draw the scene
+//===============================================================
+var clownHeight = 3;
+var clown = drawClown(clownHeight);
+scene.add(clown);
+//===============================================================
+//Set up the camera
+//===============================================================
+var renderer = new THREE.WebGLRenderer();
+
+TW.cameraSetup(renderer,
+               scene,
+               {minx: -clownHeight*0.4, maxx: clownHeight*0.4,
+                miny: 0, maxy: clownHeight*1.5,
+                minz: -clownHeight*0.5, maxz: clownHeight*0.5});
+</script>
 </body>
 </html>
