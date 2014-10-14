@@ -22,18 +22,20 @@ function reload(type) {
 	if (etag !== null) {
 		request.setRequestHeader("Wait-For-None-Match", etag);
 		console.log('doing a long poll', etag);
+		
 	} else {
 		console.log('initial fetch, not a long poll');
 	}
-
+	console.log("requestState is "+request.readyState);
 	request.onreadystatechange = function() {
+		console.log("readyState is "+request.readyState);
 		if (request.readyState==4 && request.status==200) {
-			console.log("handling response type "+type);
     		handleResponse(request.responseText, type);
     	}
  	}
 
 	request.send();
+	console.log("request sent");
 }
 
 
@@ -128,3 +130,4 @@ function newmsg() {
 		request.send(content);
 	} 
 }
+
