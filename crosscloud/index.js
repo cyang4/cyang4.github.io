@@ -57,6 +57,7 @@ $(function(){
         var location = document.getElementById("location").value;
     
         var thisJSON = makeJSON(brand, type, condition, description, price, location);
+        console.log(thisJSON);
         //var content = JSON.stringify(thisJSON);
         
         
@@ -155,17 +156,59 @@ $(function(){
             .start();
     });
 
-});
-
-function refreshList(){
-    console.log("refreshing");
+    function qElec(){
+    clearList();
+    console.log("refreshing Electronics");
     pod.query()
             .filter( { isElectronics:true } )
             .onAllResults(displayMessages)
             .start();
-}
+        }
+     function qBook(){
+    clearList();
+    console.log("refreshing");
+    pod.query()
+            .filter( { isBooks:true } )
+            .onAllResults(displayMessages)
+            .start();
+        }
 
-function clearList(){
-    var out = document.getElementById("products");
-        out.innerHTML="";
-}
+     function qClothing(){
+    clearList();
+    console.log("refreshing");
+    pod.query()
+            .filter( { isClothing:true } )
+            .onAllResults(displayMessages)
+            .start();
+        }
+
+    function qFurniture(){
+    clearList();
+    console.log("refreshing");
+    pod.query()
+            .filter( { isFurniture:true } )
+            .onAllResults(displayMessages)
+            .start();
+        }
+
+     function qOther(){
+    clearList();
+    console.log("refreshing");
+    pod.query()
+            .filter( { isOther:true } )
+            .onAllResults(displayMessages)
+            .start();
+        }
+    $('#electronicsLink').click(qElec);
+    $('#booksLink').click(qBook);
+    $('#clothingLink').click(qClothing);
+    $('#furnitureLink').click(qFurniture);
+    $('#otherLink').click(qOther);
+
+    function clearList(){
+        var out = document.getElementById("products");
+            out.innerHTML="";
+    }
+
+});
+
