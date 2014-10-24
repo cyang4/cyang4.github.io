@@ -165,3 +165,7 @@ function refreshList(){
             .start();
 }
 
+function clearList(){
+    var out = document.getElementById("products");
+        out.innerHTML="";
+}
