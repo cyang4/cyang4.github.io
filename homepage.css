@@ -1,0 +1,105 @@
+h1{
+	font-size: 60px;
+	font-weight: bold;
+	font-family: 'Metamorphous', cursive;
+	color: #BFD4D9;
+}
+
+body{
+	font-family: 'Lato', sans-serif;
+	padding-top: 45px;
+}
+
+h2{
+	font-family: 'Roboto Slab', serif;
+	font-size: 30px;
+	font-weight: bold;
+	color: #0F5959;
+}
+
+h3{
+	font-family: 'Roboto Slab', serif;
+	font-size: 15px;
+	font-weight: bold;
+	color: #638CA6;
+}
+
+h4{
+	font-family: 'Roboto Slab', serif;
+	font-size: 15px;
+}
+
+img{
+	border: 3px solid #D93240;
+	border-radius: 4px;
+
+}
+
+hr{
+	border: 0;
+	border-top: 2px dashed #D93240;
+	width: 40%;
+	background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc);
+	background-image: -moz-linear-gradient(left, #ccc, #333, #ccc);
+	background-image: -ms-linear-gradient(left, #ccc, #333, #ccc);
+	background-image: -o-linear-gradient(left, #ccc, #333, #ccc);
+}
+
+.navbar-fixed-top{
+	background-color: #17A697;
+	border-radius:0px;
+	font-family: 'Roboto Slab', serif;
+	color: white;
+	font-weight: bold;
+}
+#navigation-stuff>.navbar-nav>li>a{
+	color: #BFD4D9;
+	
+}
+#navigation-stuff>.navbar-nav>li.active>a{
+	color: white;
+	background-color: #D93240;
+	
+}
+
+
+
+#header>#name-header{
+	background-color: #0F5959;
+	height: 200px;
+	padding: 25px;
+	border: 2px;
+	
+}
+
+#projects{
+	padding: 25px;
+	background-color: #638CA6;
+}
+
+#about{
+	background-color: #BFD4D9;
+	padding: 30px;
+	height:750px;
+	
+}
+
+
+#contact{
+	background-color: #638CA6;
+	padding: 25px;
+	height: 400px;
+}
+
+
+#footer>#footer{
+	background-color: #0F5959;
+	height: 200px;
+	padding: 25px;
+}
+
+.thumbnail{
+	background-color: #BFD4D9;
+	border: 5px solid #0F5959;
+
+}
