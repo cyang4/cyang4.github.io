@@ -1,0 +1,101 @@
+<head>
+<link type="text/css" rel="stylesheet" href="formTest.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="./formTest.js"></script>
+<script type="text/javascript" src="jscolor/jscolor.js"></script>
+</head>
+<body>
+
+
+
+<form class="form-horizontal" role="form" id = "form-container">
+  <div class="form-group">
+    <center><h2>Submit an Item</h2></center>
+    <label for="inputType" class="col-sm-2 control-label">Type</label>
+    <div class="col-sm-10">
+      <select class="form-control" onchange="processChange();" id = "formType">
+          <option value = "electronics">Electronics</option>
+          <option value = "clothing">Clothing</option>
+          <option value = "furniture">Furniture</option>
+          <option value = "books">Books</option>
+          <option value = "other">Other</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputTitle" class="col-sm-2 control-label">Title</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="formTitle" placeholder="Enter a short description of your item">
+    </div>
+  </div>
+
+  <div class="form-group" style = 'display: none;' id = "genreField">
+    <label for="inputCondition" class="col-sm-2 control-label">Genre</label>
+    <div class="col-sm-10">
+      <select class="form-control" id = "condition">
+          <option value="nonfiction">Nonfiction</option>
+          <option value="fantasy">Fantasy</option>
+          <option value="historical">Historical</option>
+          <option value="other">Other</option>
+          
+      </select>
+    </div>
+  </div>
+
+   <div class="form-group" style = 'display: none;' id = "colorField">
+    <label for="inputCondition" class="col-sm-2 control-label">Color</label>
+    <div class="col-sm-10">
+      <input type="color" class="form-control" id="color" onchange = "alertColor();">
+    </div>
+  </div>
+
+   <div class="form-group">
+    <label for="inputCondition" class="col-sm-2 control-label">Condition</label>
+    <div class="col-sm-10">
+      <select class="form-control" id = "condition">
+          <option value="1">Like New</option>
+          <option value="2">Excellent</option>
+          <option value="3">Great</option>
+          <option value="4">Good</option>
+          <option value="5">Okay</option>
+          <option value="6">Passable</option> 
+          <option value="7">Poor</option> 
+          <option value="8">Falling Apart</option> 
+          <option value="9">Junk</option> 
+          <option value="10">Other</option> 
+      </select>
+    </div>
+  </div>
+
+   <div class="form-group">
+    <label for="inputDescription" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-10">
+      <textarea class = "form-control" rows = "3" id = "description"></textarea>
+    </div>
+  </div>
+
+   <div class="form-group">
+    <label for="price" class="col-sm-2 control-label">Price</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="price">
+    </div>
+  </div>
+
+   <div class="form-group">
+    <label for="location" class="col-sm-2 control-label">Location</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="location" placeholder="Pick-up Location">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+  </div>
+</form>
+</body>
