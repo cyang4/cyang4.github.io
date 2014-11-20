@@ -158,6 +158,19 @@ $(function(){
     });*/
 
     //var show = 12;
+
+    var conditions = {"1": "Like New",
+                        "2": "Excellent",
+                        "3": "Great",
+                        "4": "Good",
+                        "5": "Okay",
+                        "6": "Passable",
+                        "7": "Poor",
+                        "8": "Falling Apart",
+                        "9": "Junk",
+                        "10": "Other"};
+
+
     var displayMessages = function (messages) {
         
         messages.sort(function(a,b){return a.when<b.when?1:(a.when===b.when?0:-1)});
@@ -197,10 +210,11 @@ $(function(){
             
             var line = "<div class='displayInfo' id='displayBrand'>"+message.brand+"</div>";
             line += "<div>Price: "+message.price+"</div>";
-            line += "<div>Condition: "+message.condition+"</div>";
+            line += "<div>Condition: "+conditions[message.condition]+"</div>";
             line += "<div>Description: "+message.description+"</div>";
             line += "<div>Type: "+itemType+"</div>";
             line += "<div>Location: "+message.location+"</div>";
+            if (message.isBooks){line += "<div>Genre: " + message.genre+"</div>";}
 
             var link = document.createElement("a");
 
@@ -285,4 +299,5 @@ $(function(){
     }
 
 });
+
 
