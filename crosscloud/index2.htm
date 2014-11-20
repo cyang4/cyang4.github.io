@@ -2,14 +2,14 @@
 <html>
 <body>
     <head>   
-        <link type="text/css" rel="stylesheet" href="index.css"/>
+        <link type="text/css" rel="stylesheet" href="index2.css"/>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <script src="http://crosscloud.org/0.1.1/crosscloud.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-        <script src="./index.js"></script>
+        <script src="./index2.js"></script>
 
         <!-- stuff for autosuggest !-->
         <script type="text/javascript" src="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.js"></script>
@@ -58,15 +58,15 @@
     
     <!-- NEW STUFF HERE THAT MIGHT BREAK THINGS !-->
 <div>
-            <center><button id="forNewItem">Submit an Item For Sale</button></center>
+            <center><button id="forNewItem" class = "various" href = "#form-box">Submit an Item For Sale</button></center>
         </div>
 
 
 <!--<a class = "various" href = "#form-div">Popup</a>!-->
-<div style = "display: block">
+<div style = "display: none">
 <center>
-
-<form class="form-horizontal" role="form" id = "form-container" style= "display: none">
+<div id = "form-box">
+<form class="form-horizontal" role="form" id = "form-container" >
   <div class="form-group">
     <center><h2>Submit an Item</h2></center>
     <label for="inputType" class="col-sm-2 control-label">Type</label>
@@ -159,10 +159,10 @@
     </div>
   </div>
 </form>
-
+</div>
 </center>
 </div>
-
+</div>
     <!--<div id="formDiv">
         
         <div>

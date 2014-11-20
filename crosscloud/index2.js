@@ -1,28 +1,26 @@
 
 $(document).ready(function(){
     //toggle form visibility
-    $('#forNewItem').click(function(){
+    /*$('#forNewItem').click(function(){
         if(document.getElementById("form-container").style.display=="none")
             document.getElementById("form-container").style.display="block";
         else 
             document.getElementById("form-container").style.display="none";
         
-    });
+    });*/
 
     //commented code was me playing with fancybox... ignore for now.
-    /*$(".various").fancybox({
+    $(".various").fancybox({
         maxWidth    : 800,
         maxHeight   : 600,
         fitToView   : false,
         width       : '50%',
-        height      : '65%',
+        height      : '100%',
         autoSize    : false,
         closeClick  : false,
         openEffect  : 'none',
         closeEffect : 'none'
     });
-
-    $("#form-containter").submit(function() { alert("hi")});*/
 
 
     processChange();
