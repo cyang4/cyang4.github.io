@@ -106,6 +106,8 @@ $(function(){
     var myMessages = [];
 
     var sendProduct = function () {
+        var genre = "";
+        var color = "";
         var type = document.getElementById("formType").value;
         
         if (type == "books"){var brand = document.getElementById("bookFormTitle").value;}
@@ -120,12 +122,7 @@ $(function(){
         var description = document.getElementById("description").value;
         var price = document.getElementById("price").value;
         var location = document.getElementById("location").value;
-        
-        //if Book
-
-        //else if electronics
-
-        //else just send
+      
 
         var thisJSON = makeJSON(brand, type, condition, description, price, location, genre, color);
         console.log(thisJSON);
