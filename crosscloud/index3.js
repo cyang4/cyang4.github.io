@@ -1,18 +1,12 @@
 var pod = crosscloud.connect();
 pod.onLogin(function (userID){
-	
+
 	$("#products").html("waiting for data...");
 
     pod.onLogout(function () {
         $("#products").html("<i>not connected</i>");
     });
-
-    pod.query()
-        .filter( { CrossCloudReuseList:true } )
-        .onAllResults(displayMessages)
-        .start();
-
-	var displayMessages = function (messages) {
+    var displayMessages = function (messages) {
         
         messages.sort(function(a,b){return a.when<b.when?1:(a.when===b.when?0:-1)});
         //var count = 0;
@@ -72,6 +66,13 @@ pod.onLogin(function (userID){
             $("#out").append("<p><i>("+(count-show)+" more not shown)</i></p>");
         }*/
     };
+
+    pod.query()
+        .filter( { CrossCloudReuseList:true } )
+        .onAllResults(displayMessages)
+        .start();
+
+	
 
 	$(document).ready(function(){
     	//toggle form visibility
