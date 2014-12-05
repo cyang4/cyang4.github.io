@@ -5,7 +5,7 @@
         <link type="text/css" rel="stylesheet" href="index.css"/>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <script src="http://crosscloud.org/0.1.1/crosscloud.js"></script>
+        <script src="http://crosscloud.org/0.1.3-beta1/crosscloud.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     
@@ -155,7 +155,20 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default" id = "submitbutton">Submit</button>
+      <input type="file" id="imagePick" name="files[]" />
+    </div>
+  </div>
+
+  <div class = "form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div id= "imagePreview"></div>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="button" class="btn btn-default" id = "submitbutton">Submit</button>
     </div>
   </div>
 </form>
@@ -163,58 +176,7 @@
 </center>
 </div>
 
-    <!--<div id="formDiv">
-        
-        <div>
-            <button id="forNewItem">Submit an Item For Sale</button>
-        </div>
-        
-    <form class="newItemForm notVisibleForm" id = "entry" action="#" >
-        <div class="prodInfo">
-            Type: 
-            <select id="type">
-                <option value="electronics">Electronics</option>
-                <option value="clothing">Clothing</option>
-                <option value="books">Books</option>
-                <option value="furniture">Furniture</option>
-                <option value="other">Other</option> 
-            </select>
-        </div>
-        <div class="prodInfo">
-            Title: 
-            <input id="title" type="text" placeholder="Entire a short description of the Product"/>
-        </div>
-        <div class="prodInfo">
-            Condition:
-            <select id="condition">
-                <option value="1">Like New</option>
-                <option value="2">Excellent</option>
-                <option value="3">Great</option>
-                <option value="4">Good</option>
-                <option value="5">Okay</option>
-                <option value="6">Passable</option> 
-                <option value="7">Poor</option> 
-                <option value="8">Falling Apart</option> 
-                <option value="9">Junk</option> 
-                <option value="10">Other</option> 
-            </select>
-        </div>
-        <div class="prodInfo">
-            Description:
-            <textarea id="description"></textarea>
-        <div  class="prodInfo">
-            Price:
-            <input id="price" type="text">
-        </div>
-        <div class="prodInfo">
-            Location:
-            <input id="location" type="text" placeholder="Pick-up Location"/>
-        </div>
-        <input type="submit" value="submit" id = "submit">
-    </form>
-    </div>!-->
-    
-        
+   
     
     <div>
         <div><h2><b>Items For Sale:</b></h2></div>
