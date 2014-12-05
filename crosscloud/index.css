@@ -22,11 +22,28 @@ body{
     margin-right:10px;
     padding: 5px;
 }
+.imagePlace{
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img{
+    width:200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
 
 #displayBrand{
     font-weight: bolder;
     font-size: 1.5em;
+
 }
+
+
 
 
 
