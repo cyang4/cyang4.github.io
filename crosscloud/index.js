@@ -109,7 +109,7 @@ pod.onLogin(function (userID){
                 };
             if(message.brand!=""){
                 var line = "<div class='displayInfo' id='displayBrand'>"+message.brand+"</div>";
-                if(message.image!= null){line+='<div><img src ="'+message.image+'"/>';}
+                if(message.dataURL!= null){line+='<div><img src ="'+message.dataURL+'"/>';}
                 line += "<div>Price: "+message.price+"</div>";
                 line += "<div>Condition: "+conditions[message.condition]+"</div>";
                 line += "<div>Description: "+message.description+"</div>";
