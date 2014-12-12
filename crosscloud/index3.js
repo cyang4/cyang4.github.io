@@ -58,7 +58,7 @@ pod.onLogin(function (userID){
 
         document.getElementById('imagePick').addEventListener('change', handleFileSelect, false);
 
-    $("#products").html("waiting for data...");
+    //$("#products").html("waiting for data...");
 
     pod.onLogout(function () {
         $("#products").html("<i>not connected</i>");
@@ -219,7 +219,7 @@ pod.onLogin(function (userID){
     //===============================================================================================
     var sendProduct = function () {
         var genre = "";
-        var color = "";
+        //var color = "";
         var type = document.getElementById("formType").value;
         
         if (type == "books"){var brand = document.getElementById("bookFormTitle").value;}
@@ -242,11 +242,8 @@ pod.onLogin(function (userID){
 
         document.getElementById("formTitle").value = "";
         document.getElementById("bookFormTitle").value = "";
-        //document.getElementById("formType").value = "";
         document.getElementById("genre").value = "";
-        document.getElementById("color").value = "";
         document.getElementById("description").value = "";
-        //document.getElementById("condition").value = "";
         document.getElementById("price").value = "";
         document.getElementById("location").value = "";
 
@@ -298,11 +295,19 @@ pod.onLogin(function (userID){
             .onAllResults(displayMessages)
             .start();
         }
+    function qAll(){
+        clearList();
+        pod.query()
+            .filter( { isForSale3:true} )
+            .onAllResults(displayMessages)
+            .start();
+    }
     $('#electronicsLink').click(qElec);
     $('#booksLink').click(qBook);
     $('#clothingLink').click(qClothing);
     $('#furnitureLink').click(qFurniture);
     $('#otherLink').click(qOther);
+    $('#allLink').click(qAll);
 
     //===============================================================================================
     //
@@ -318,7 +323,7 @@ pod.onLogin(function (userID){
 });
 
 
-var hiddenFields = ["genreField", "colorField", "titleField", "bookTitleField"];
+var hiddenFields = ["genreField", "titleField", "bookTitleField"];
 
 //===============================================================================================
 //
@@ -338,7 +343,7 @@ function processChange(){
     else if (t=="electronics")
     {
         hideAll();
-        document.getElementById("colorField").style.display="block";
+
         document.getElementById("titleField").style.display="block";
     }
     else{

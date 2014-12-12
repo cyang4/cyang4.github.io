@@ -2,12 +2,17 @@
 <html>
 <body>
     <head>   
-        <link type="text/css" rel="stylesheet" href="index.css"/>
+      
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <script src="http://crosscloud.org/0.1.3/crosscloud.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+        <link type="text/css" rel="stylesheet" href="index.css"/>
+        <!-- Font stuff !-->
+        <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Arimo" rel="stylesheet" type="text/css">
     
         <script src="./index3.js"></script>
 
@@ -15,8 +20,6 @@
         <script type="text/javascript" src="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.js"></script>
         <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.css" />
 
-        <!-- Color stuff !-->
-        <script type="text/javascript" src="jscolor/jscolor.js"></script>
 
         <!-- Fancybox !-->
        <!-- <link rel="stylesheet" href="/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
@@ -26,31 +29,34 @@
     </head>
     
     
-    <h1>Crosscloud Sales App</h1>
-    
-    <center>
+    <div id = "title"><center><h1>CrossSale</h1></center>
+
+   <!-- <center>
     <a href = "index.htm"><i class = "glyphicon glyphicon-home"></i></a>
      <a href = "message.htm"><i class = "glyphicon glyphicon-envelope"></i></a>
-    </center>
+    </center>!-->
     <br>
-    
+    </div>
 
     <div id="queryLinks">
         <div class="btn-group btn-group-justified">
             <div class="btn-group">
-                <button type="button" class="btn btn-default" id="electronicsLink">Electronics</button>
+                <button type="button" class="btn btn-default" id="electronicsLink"><h2>Electronics</h2></button>
             </div>
             <div class="btn-group">
-                <button type="button" class="btn btn-default" id="booksLink">Books</button>
+                <button type="button" class="btn btn-default" id="booksLink"><h2>Books</h2></button>
             </div>
             <div class="btn-group">
-                <button type="button" class="btn btn-default" id="clothingLink">Clothing</button>
+                <button type="button" class="btn btn-default" id="clothingLink"><h2>Clothing</h2></button>
             </div>
             <div class="btn-group">
-                <button type="button" class="btn btn-default" id="furnitureLink">Furniture</button>
+                <button type="button" class="btn btn-default" id="furnitureLink"><h2>Furniture</h2></button>
             </div>
             <div class="btn-group">
-                <button type="button" class="btn btn-default" id="otherLink">Other</button>
+                <button type="button" class="btn btn-default" id="otherLink"><h2>Other</h2></button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default" id="allLink"><h2>All</h2></button>
             </div>
         </div>
     </div>
@@ -108,12 +114,7 @@
     </div>
   </div>
 
-   <div class="form-group" style = 'display: none;' id = "colorField">
-    <label for="inputCondition" class="col-sm-2 control-label">Color</label>
-    <div class="col-sm-10">
-      <input type="color" class="form-control" id="color">
-    </div>
-  </div>
+   
 
    <div class="form-group">
     <label for="inputCondition" class="col-sm-2 control-label">Condition</label>
@@ -180,7 +181,7 @@
    
     
     <div>
-        <div><h2><b>Items For Sale:</b></h2></div>
+        
         <div id="products"></div>
         
     </div>
