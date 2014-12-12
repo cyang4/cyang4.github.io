@@ -107,6 +107,7 @@ pod.onLogin(function (userID){
                 
             if(message.brand!=""){
                 var line = "<div class='displayInfo' id='displayBrand'><center>"+message.brand+"</center></div>";
+                if(message.owner==pod.podURL){line += "<center><button type = 'button' class = 'deleteButton' messageId= " + message._id+">Remove</button></center>";}
                 if(message.dataURL!=null){line+='<div class = "imagePlace"><img src = "'+message.dataURL+'"/></div>';}
                 line += "<div>Price: "+message.price+"</div>";
                 line += "<div>Condition: "+conditions[message.condition]+"</div>";
@@ -130,10 +131,20 @@ pod.onLogin(function (userID){
         
     };
 
+    //===========================================================================================
+    // Delete button function
+    //===========================================================================================
+
+    $(document).on('click', '.deleteButton', function(){
+        var thisEntry = $(this).attr("messageId");
+        console.log(thisEntry);
+        pod.delete({_id:thisEntry});
+    });
+
 
 
     pod.query()
-        .filter( { CrossCloudReuseList:true, isForSale3:true } )
+        .filter( {isForSale3:true} )
         .onAllResults(displayMessages)
         .start();
 
@@ -174,6 +185,7 @@ pod.onLogin(function (userID){
     file["location"] = location;
     file["genre"] = genre;
     file["dataURL"] = dataURL;
+    file["owner"]= pod.podURL;
     
     var isElectronics = (type == "electronics");
     var isClothing = (type == "clothing");
@@ -251,7 +263,7 @@ pod.onLogin(function (userID){
     function qElec(){
     clearList();
     pod.query()
-            .filter( { isElectronics:true , isForSale3:true} )
+            .filter( { isElectronics:true, isForSale3: true} )
             .onAllResults(displayMessages)
             .start();
         }
