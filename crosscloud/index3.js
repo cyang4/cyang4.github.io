@@ -105,7 +105,7 @@ pod.onLogin(function (userID){
             message.timeDate = new Date(Number(message.time))
             var date = message.timeDate.toLocaleString();
                 
-            if(message.brand!=""){
+            if(message.brand!="" && message.owner!=""){
                 var line = "<div class='displayInfo' id='displayBrand'><center>"+message.brand+"</center></div>";
                 if(message.owner==pod.podURL){line += "<center><button type = 'button' class = 'deleteButton' messageId= " + message._id+">Remove</button></center>";}
                 if(message.dataURL!=null){line+='<div class = "imagePlace"><img src = "'+message.dataURL+'"/></div>';}
@@ -115,6 +115,7 @@ pod.onLogin(function (userID){
                 line += "<div>Type: "+itemType+"</div>";
                 line += "<div>Location: "+message.location+"</div>";
                 if (message.isBooks){line += "<div>Genre: " + message.genre+"</div>";}
+                line += "<div>Owner: " + message.owner+"</div>";
                 
                 var link = document.createElement("a");
 
@@ -144,7 +145,7 @@ pod.onLogin(function (userID){
 
 
     pod.query()
-        .filter( {isForSale3:true} )
+        .filter( {isForSale3:true, owner:{"$exists": true} })
         .onAllResults(displayMessages)
         .start();
 
@@ -256,18 +257,18 @@ pod.onLogin(function (userID){
     // Individual queries for the different categories. Should clean this up...
     //
     //===============================================================================================
-
+   
     function qElec(){
     clearList();
     pod.query()
-            .filter( { isElectronics:true, isForSale3: true} )
+            .filter( { isElectronics:true, isForSale3: true, owner:{"$exists": true}} )
             .onAllResults(displayMessages)
             .start();
         }
     function qBook(){
     clearList();
     pod.query()
-            .filter( { isBooks:true, isForSale3:true} )
+            .filter( { isBooks:true, isForSale3:true, owner:{"$exists": true}} )
             .onAllResults(displayMessages)
             .start();
         }
@@ -275,7 +276,7 @@ pod.onLogin(function (userID){
     function qClothing(){
     clearList();
     pod.query()
-            .filter( { isClothing:true, isForSale3:true } )
+            .filter( { isClothing:true, isForSale3:true, owner:{"$exists": true}} )
             .onAllResults(displayMessages)
             .start();
         }
@@ -283,7 +284,7 @@ pod.onLogin(function (userID){
     function qFurniture(){
     clearList();
     pod.query()
-            .filter( { isFurniture:true, isForSale3:true } )
+            .filter( { isFurniture:true, isForSale3:true, owner:{"$exists": true} } )
             .onAllResults(displayMessages)
             .start();
         }
@@ -291,14 +292,14 @@ pod.onLogin(function (userID){
     function qOther(){
     clearList();
     pod.query()
-            .filter( { isOther:true , isForSale3:true} )
+            .filter( { isOther:true , isForSale3:true, owner:{"$exists": true}} )
             .onAllResults(displayMessages)
             .start();
         }
     function qAll(){
         clearList();
         pod.query()
-            .filter( { isForSale3:true} )
+            .filter( { isForSale3:true, owner:{"$exists": true}} )
             .onAllResults(displayMessages)
             .start();
     }
